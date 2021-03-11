@@ -38,8 +38,22 @@ class Solution2:
                     ans += months[i]
             return ans + d  # calculate days
         
+        # get days from 1971
+        def getMonths(y, m, d):
+            ans = 0
+            # calculate years
+            for i in range(1971, y):
+                    ans += 12
+            # calculate months
+            for i in range(1, m):
+                    ans += 1
+            return ans  # calculate months
+
         days1 = getDays(y1, m1, d1)
         days2 = getDays(y2, m2, d2)
+        month1 = getMonths(y1, m1, d1)
+        month2 = getMonths(y2, m2, d2)
+        print(abs(month1 - month2), month1, month2)
         return abs(days1 - days2)
 
 
@@ -47,5 +61,5 @@ class Solution2:
 date1 = "2020-01-15"
 date2 = "2019-12-31"
 
-s = Solution()
+s = Solution2()
 print(s.daysBetweenDates(date1, date2))
