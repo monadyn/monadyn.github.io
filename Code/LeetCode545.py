@@ -42,6 +42,7 @@ class Solution:
         # base case
         if not root: return []
         b = [root.val]
+
         #DFS. 分别定义三个函数, 实现查找左边界, 叶子, 右边界.
         leftBoundary(root.left)
         leaves(root)
