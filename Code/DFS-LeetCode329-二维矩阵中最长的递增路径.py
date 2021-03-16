@@ -1,14 +1,11 @@
 class Solution(object):
     def longestIncreasingPath(self, matrix):
-        """
-        :type matrix: List[List[int]]
-        :rtype: int
-        """
         if not matrix or not matrix[0]:
             return 0
         m, n = len(matrix), len(matrix[0])
         res = 0
         cache = [[-1] * n for _ in range(m)]
+        #使用cache保存已经访问过的位置，这样能节省了很多搜索的过程，然后有个continue是为了剪枝。
         for i in range(m):
             for j in range(n):
                 path = self.dfs(matrix, cache, m, n, i, j)
@@ -36,3 +33,4 @@ nums = [
   [2,2,1]
 ]
 print(s.longestIncreasingPath(nums))
+#时间复杂度是O((MN)^2)，空间复杂度是O(MN)。
