@@ -10,7 +10,6 @@ class TreeNode(object):
  
 class Solution(object):
     maxSum = float("-inf")
- 
     # @param root, a tree node
     # @return an integer
     def maxPathSum(self, root):
@@ -18,16 +17,21 @@ class Solution(object):
         return self.maxSum
 
 #recursive 
-    def maxPathSumRecu(self, root):
-        
+    def maxPathSumRecu(self, root):        
+        #递归，在递归到每个节点时，
+        #为了两个子树中以子树根节点为起点的最长路径和的和加上自己
         if root is None:
             return 0
         print('+', root.val, self.maxSum)
+        #左右子树根节点为起点的最长路径和
+        #如果子树的和为负，则取0。
         left = max(0, self.maxPathSumRecu(root.left))
         right = max(0, self.maxPathSumRecu(root.right))
+        #用经过该节点的最长路径和更新最终结果，
         self.maxSum = max(self.maxSum, root.val + left + right)
         print('-', root.val, self.maxSum)
-        return root.val + max(left, right, 0)
+        #并把当前节点的值加上最大子树的路径和（或0）返回给上一层，
+        return root.val + max(left, right, 0) 
 
 
 
