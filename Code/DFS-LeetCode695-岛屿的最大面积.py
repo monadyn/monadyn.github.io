@@ -1,6 +1,28 @@
 from pprint import pprint
 
 class Solution(object):
+    def maxAreaOfIsland(self, grid):
+        if len(grid) == 0: return 0
+        N, M = len(grid), len(grid[0])
+        vsted = [[0]*M for _ in range(N)]
+        
+        def dfs(i, j, n):
+            if vsted[i][j] == 1: return
+            vsted[i][j] = 1
+            n += 1
+            for dx,dy in [(-1,0),(1,0),(0,-1),(0,1)]:
+                x,y = i+dx,j+dy
+                if -1<x<N and -1<y<M and grid[x][y] == 1 and vsted[i][j] == 0:
+                    dfs(x,y, n)
+                    
+        res = 0
+        for i in range(N):
+            for j in range(M):
+                n = 0
+                if grid[i][j] == 1 and vsted[i][j] == 0:
+                    dfs(i, j, n)
+                    res = max(res, n)
+        return res
 
     def maxAreaOfIsland2(self, grid):
         """
@@ -15,7 +37,7 @@ class Solution(object):
             return 0
         return max(dfs(i, j) for i in range(row) for j in range(col))
 
-    def maxAreaOfIsland(self, grid):
+    def maxAreaOfIsland1(self, grid):
         """
         :type grid: List[List[int]]
         :rtype: int
@@ -50,10 +72,11 @@ t1 =[[0,0,1,0,0,0,0,1,0,0,0,0,0],
  [0,0,0,0,0,0,0,0,0,0,1,0,0],
  [0,0,0,0,0,0,0,1,1,1,0,0,0],
  [0,0,0,0,0,0,0,1,1,0,0,0,0]]
+t1 = [[1,1,0,0,0],[1,1,0,0,0],[0,0,0,1,1],[0,0,0,1,1]]
 
 t2 = [[0,0,0,0,0,0,0,0]]
 
 pprint(t1)
 print(s.maxAreaOfIsland2(t1))
 #print(s.maxAreaOfIsland(t1))
-print(t2)
+#print(t2)
