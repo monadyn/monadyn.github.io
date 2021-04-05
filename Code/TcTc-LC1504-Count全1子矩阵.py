@@ -1,6 +1,37 @@
 from pprint import pprint
 def numSubmat(mat):
         pprint(mat)
+        nums = [[0]*len(mat[0]) for _ in range(len(mat))]
+        for row in range(len(mat)):
+            for col in range(len(mat[0])):
+                if col == 0:
+                    nums[row][col] = mat[row][col]
+                else:
+                    if mat[row][col] == 0:
+                        nums[row][col] = 0
+                    else:
+                        nums[row][col] = nums[row][col-1] + 1
+        pprint(nums)
+        res = 0
+        for row in range(len(mat)):
+            for col in range(len(mat[0])):
+                Min = nums[row][col]
+                k = row
+                while(k>=0):
+                    if nums[k][col] == 0:
+                        break
+                    Min = min(nums[k][col], Min)  #神来之笔
+                    if k == row:
+                        print('\tr=%s' % row, 'c=%s' % col,'k=%s' % k, Min)
+                    else:
+                        print('\t\tr=%s' % row, 'c=%s' % col,'k=%s' % k, Min)
+                    res += Min
+                    k -= 1
+        pprint(nums)
+        return res
+
+def numSubmat2(mat):
+        pprint(mat)
         m,n = len(mat),len(mat[0])
         partial_sum = [[0]*n for _ in range(m+1)]; #pprint(partial_sum)
         for i in range(n):#col

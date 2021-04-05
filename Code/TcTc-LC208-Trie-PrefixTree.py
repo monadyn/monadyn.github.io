@@ -10,10 +10,13 @@ class Trie(object):
 
     def insert(self, word):
         current = self.root
-        for w in word:
-            print('\t', w)
-            current = current.children[w]
         print(word)
+        for w in word:
+            print('\t+', w, current.children.keys())
+            tmp = current.children[w]
+            print('\t-', w, current.children.keys(), tmp)
+            current = tmp
+            #print('\t-', w, current.children.keys())
         current.isword = True
 
     def search(self, word):
@@ -48,8 +51,10 @@ class Trie(object):
 
 
 obj = Trie()
-for word in ['A', 'to', 'tea', 'ted', 'ten', 'i', 'in',  'inn']:
+#for word in ['A', 'to', 'tea', 'ted', 'ten', 'i', 'in',  'inn']:
+for word in ['hello']:
     obj.insert(word)
 print('tea', obj.search('tea'))
 print('te', obj.search('te'))
-#param_3 = obj.startsWith(prefix)
+print('tea', obj.startsWith('tea'))
+print('helloa', obj.startsWith('helloa'))
